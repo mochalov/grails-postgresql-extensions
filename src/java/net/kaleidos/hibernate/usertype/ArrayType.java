@@ -8,6 +8,7 @@ import org.hibernate.usertype.UserType;
 
 import java.io.Serializable;
 import java.sql.*;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -45,7 +46,8 @@ public class ArrayType implements UserType, ParameterizedType {
 
     @Override
     public boolean equals(Object x, Object y) throws HibernateException {
-        return x == null ? y == null : x.equals(y);
+        return x == null ? y == null : ((x.getClass().isArray() && y.getClass().isArray()) ?
+                Arrays.equals((Object[]) x, (Object[]) y) : x.equals(y));
     }
 
     @Override
