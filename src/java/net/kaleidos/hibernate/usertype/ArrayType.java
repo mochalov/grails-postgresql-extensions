@@ -46,8 +46,15 @@ public class ArrayType implements UserType, ParameterizedType {
 
     @Override
     public boolean equals(Object x, Object y) throws HibernateException {
-        return x == null ? y == null : ((x.getClass().isArray() && y.getClass().isArray()) ?
-                Arrays.equals((Object[]) x, (Object[]) y) : x.equals(y));
+        if (x == y) {
+            return true;
+        }
+
+        if (x == null || y == null) {
+            return false;
+        }
+    
+        return Arrays.deepEquals(x, y);
     }
 
     @Override
