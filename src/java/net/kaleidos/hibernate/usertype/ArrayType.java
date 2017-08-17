@@ -53,8 +53,44 @@ public class ArrayType implements UserType, ParameterizedType {
         if (x == null || y == null) {
             return false;
         }
-    
-        return Arrays.deepEquals(x, y);
+
+        if (x instanceof Object[] && y instanceof Object[]) {
+            return Arrays.deepEquals((Object[]) x, (Object[]) y);
+        }
+
+        if (x instanceof byte[] && y instanceof byte[]) {
+            return Arrays.equals((byte[]) x, (byte[]) y);
+        }
+
+        if (x instanceof short[] && y instanceof short[]) {
+            return Arrays.equals((short[]) x, (short[]) y);
+        }
+
+        if (x instanceof int[] && y instanceof int[]) {
+            return Arrays.equals((int[]) x, (int[]) y);
+        }
+
+        if (x instanceof long[] && y instanceof long[]) {
+            return Arrays.equals((long[]) x, (long[]) y);
+        }
+
+        if (x instanceof char[] && y instanceof char[]) {
+            return Arrays.equals((char[]) x, (char[]) y);
+        }
+
+        if (x instanceof float[] && y instanceof float[]) {
+            return Arrays.equals((float[]) x, (float[]) y);
+        }
+
+        if (x instanceof double[] && y instanceof double[]) {
+            return Arrays.equals((double[]) x, (double[]) y);
+        }
+
+        if (x instanceof boolean[] && y instanceof boolean[]) {
+            return Arrays.equals((boolean[]) x, (boolean[]) y);
+        }
+
+        return x.equals(y);
     }
 
     @Override
